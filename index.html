@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Direktori Beasiswa Jepang | Filter Jenjang, Cakupan & Jalur Daftar</title>
+    <title>MichiEdu | Direktori Filter Beasiswa Jepang</title>
+    <meta name="description" content="Saring daftar beasiswa ke Jepang di MichiEdu berdasarkan jenjang studi, tanggungan biaya, jalur pendaftaran, ketentuan bahasa, dan bulan pendaftaran.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +34,11 @@
             color: #1e40af;
             border: 1px solid #c7d2fe;
         }
+        .badge-lang {
+            background-color: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -59,13 +65,13 @@
                 <div class="max-w-2xl">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-xs font-semibold tracking-wide uppercase mb-4 border border-white/20">
                         <span>🇮🇩 ➔ 🇯🇵</span>
-                        <span>Rangkuman Referensi Pamflet JASSO</span>
+                        <span>MichiEdu • Rangkuman Referensi Pamflet JASSO</span>
                     </div>
                     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
                         Direktori Filter Beasiswa Jepang
                     </h1>
                     <p class="mt-3 text-rose-100 text-sm sm:text-base leading-relaxed">
-                        Saring daftar beasiswa ke Jepang dalam satu halaman praktis berdasarkan <strong class="text-white">jenjang studi</strong>, <strong class="text-white">apa saja yang ditanggung</strong>, <strong class="text-white">jalur lokasi pendaftaran</strong> (dari Indonesia atau setelah di Jepang), serta <strong class="text-white">bulan pendaftaran</strong>.
+                        Saring daftar beasiswa ke Jepang dalam satu halaman praktis berdasarkan <strong class="text-white">jenjang studi</strong>, <strong class="text-white">apa saja yang ditanggung</strong>, <strong class="text-white">jalur lokasi pendaftaran</strong> (dari Indonesia atau setelah di Jepang), <strong class="text-white">ketentuan bahasa</strong>, serta <strong class="text-white">bulan pendaftaran</strong>.
                     </p>
                 </div>
 
@@ -111,12 +117,12 @@
             </div>
 
             <!-- Baris Pencarian & Filter Dropdown -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Cari Nama -->
-                <div class="lg:col-span-1">
+                <div>
                     <label for="searchInput" class="block text-xs font-semibold text-slate-600 mb-1.5">Cari Nama / Penyelenggara</label>
                     <div class="relative">
-                        <input type="text" id="searchInput" placeholder="Contoh: MEXT, Ajinomoto..."
+                        <input type="text" id="searchInput" placeholder="Contoh: MEXT, Ajinomoto, JDS..."
                             class="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition">
                         <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -179,6 +185,28 @@
                         <option value="Desember">Desember</option>
                     </select>
                 </div>
+
+                <!-- Filter Ketentuan Bahasa -->
+                <div>
+                    <label for="filterBahasa" class="block text-xs font-semibold text-slate-600 mb-1.5">Ketentuan Bahasa</label>
+                    <select id="filterBahasa" class="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition">
+                        <option value="all">Semua Ketentuan Bahasa</option>
+                        <option value="Bahasa Inggris">Bisa Bahasa Inggris / Tanpa JLPT Awal</option>
+                        <option value="Bahasa Jepang">Perlu Kemampuan Bahasa Jepang</option>
+                        <option value="Fleksibel">Fleksibel / Tergantung Program</option>
+                    </select>
+                </div>
+
+                <!-- Urutkan Hasil -->
+                <div class="sm:col-span-2">
+                    <label for="sortBy" class="block text-xs font-semibold text-slate-600 mb-1.5">Urutkan Tampilan</label>
+                    <select id="sortBy" class="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition">
+                        <option value="default">Default (Rekomendasi)</option>
+                        <option value="full_first">Ditanggung Penuh Dulu</option>
+                        <option value="indo_first">Daftar dari Indonesia Dulu</option>
+                        <option value="name_asc">Nama Beasiswa (A – Z)</option>
+                    </select>
+                </div>
             </div>
 
             <!-- Quick Filter Chips -->
@@ -195,6 +223,12 @@
                 </button>
                 <button type="button" onclick="applyQuickFilter('in_japan')" class="quick-chip px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition cursor-pointer">
                     🇯🇵 Sudah Kuliah di Jepang
+                </button>
+                <button type="button" onclick="applyQuickFilter('english_friendly')" class="quick-chip px-3 py-1.5 rounded-full text-xs font-medium bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 transition cursor-pointer">
+                    🌐 Jalur Bahasa Inggris
+                </button>
+                <button type="button" onclick="applyQuickFilter('japan_lang')" class="quick-chip px-3 py-1.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition cursor-pointer">
+                    🇯🇵 Jalur Bahasa Jepang
                 </button>
             </div>
         </section>
@@ -221,7 +255,7 @@
             </div>
             <h3 class="text-lg font-bold text-slate-800">Tidak ada beasiswa yang cocok</h3>
             <p class="text-sm text-slate-500 max-w-md mx-auto mt-1">
-                Coba ubah kombinasi filter jenjang, cakupan biaya, atau bulan pendaftaran untuk melihat opsi beasiswa lainnya.
+                Coba ubah kombinasi filter jenjang, cakupan biaya, ketentuan bahasa, atau bulan pendaftaran untuk melihat opsi beasiswa lainnya.
             </p>
             <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-xl hover:bg-red-700 transition cursor-pointer">
                 Tampilkan Semua Beasiswa
@@ -274,6 +308,10 @@
                     <div>
                         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Kategori Pembiayaan</span>
                         <p id="modalKategoriBiaya" class="text-sm font-semibold text-slate-800 mt-0.5"></p>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Ketentuan Bahasa</span>
+                        <p id="modalBahasa" class="text-sm font-semibold text-slate-800 mt-0.5"></p>
                     </div>
                 </div>
 
@@ -342,7 +380,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Jenjang (pisahkan koma) *</label>
                         <input type="text" id="newJenjang" required placeholder="S1, S2" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl">
@@ -350,6 +388,14 @@
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Bulan Pendaftaran *</label>
                         <input type="text" id="newBulan" required placeholder="April - Mei" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Ketentuan Bahasa *</label>
+                        <select id="newBahasa" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl">
+                            <option value="Bahasa Inggris">Bahasa Inggris</option>
+                            <option value="Bahasa Jepang">Bahasa Jepang</option>
+                            <option value="Fleksibel">Fleksibel</option>
+                        </select>
                     </div>
                 </div>
                 <div>
@@ -380,7 +426,6 @@
     </div>
 
     <script>
-        // Data Beasiswa Jepang (Dirangkum berdasarkan pamflet JASSO & program populer yang tersedia bagi pelajar Indonesia)
         const initialScholarships = [
             {
                 id: 1,
@@ -389,6 +434,7 @@
                 jenjang: ["D3/Kejuruan", "S1", "S2", "S3", "Riset/Non-Gelar"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "100% Biaya kuliah (uang pangkal & SPP penuh)",
                     "Tunjangan hidup bulanan (± ¥117.000 – ¥145.000/bulan)",
@@ -409,6 +455,7 @@
                 jenjang: ["S1", "S2", "S3", "Riset/Non-Gelar"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Bahasa Inggris",
                 tanggungan: [
                     "100% Biaya kuliah (ujian masuk, pendaftaran, dan SPP)",
                     "Tunjangan hidup bulanan (± ¥117.000 – ¥145.000/bulan)",
@@ -428,6 +475,7 @@
                 jenjang: ["S1"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "100% Biaya kuliah selama sekolah bahasa (1,5 tahun) + S1 (4 tahun)",
                     "Tunjangan hidup bulanan ¥145.000/bulan",
@@ -448,6 +496,7 @@
                 jenjang: ["S2", "Riset/Non-Gelar"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "100% Biaya kuliah (ujian, pendaftaran, dan SPP)",
                     "Tunjangan bulanan ¥150.000 (Research) & ¥180.000 (Master)",
@@ -467,6 +516,7 @@
                 jenjang: ["S2"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "100% Biaya kuliah & pendaftaran universitas",
                     "Tunjangan hidup bulanan ¥160.000/bulan",
@@ -486,6 +536,7 @@
                 jenjang: ["S2"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Bahasa Inggris",
                 tanggungan: [
                     "100% Biaya kuliah penuh",
                     "Tunjangan hidup bulanan & subsidi perumahan",
@@ -506,6 +557,7 @@
                 jenjang: ["D3/Kejuruan", "S1", "S2", "S3", "Riset/Non-Gelar"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "Tunjangan hidup bulanan ¥80.000/bulan (selama 8 hari – 1 tahun)",
                     "SPP umumnya dibebaskan oleh kampus mitra pertukaran"
@@ -524,6 +576,7 @@
                 jenjang: ["S1", "S2"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["spp"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "Bebas biaya ujian masuk & uang pangkal",
                     "Bebas biaya kuliah (SPP) penuh tahun pertama (dan hingga 50–100% tahun berikutnya sesuai prestasi)"
@@ -542,6 +595,7 @@
                 jenjang: ["D3/Kejuruan", "S1"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Bahasa Jepang",
                 tanggungan: [
                     "Tunjangan bulanan ¥48.000/bulan selama 1 tahun pertama kuliah"
                 ],
@@ -559,6 +613,7 @@
                 jenjang: ["D3/Kejuruan", "S1", "S2", "S3"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "Tunjangan hidup bulanan ¥48.000/bulan selama 6 atau 12 bulan"
                 ],
@@ -576,6 +631,7 @@
                 jenjang: ["S2", "S3"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Bahasa Jepang",
                 tanggungan: [
                     "Tunjangan bulanan ¥150.000 – ¥200.000/bulan (tergantung durasi studi hingga lulus)",
                     "Dukungan biaya partisipasi konferensi internasional"
@@ -594,6 +650,7 @@
                 jenjang: ["S1", "S2", "S3"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Bahasa Jepang",
                 tanggungan: [
                     "Tunjangan bulanan ¥100.000/bulan (S1) atau ¥140.000/bulan (S2/S3)",
                     "Dukungan kegiatan pertukaran budaya Rotary Club"
@@ -612,6 +669,7 @@
                 jenjang: ["S3"],
                 kategoriBiaya: "Ditanggung Penuh",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Bahasa Jepang",
                 tanggungan: [
                     "Tunjangan riset & hidup ¥200.000/bulan selama 1 tahun (tahun akhir S3)"
                 ],
@@ -629,6 +687,7 @@
                 jenjang: ["S2", "S3"],
                 kategoriBiaya: "Parsial",
                 tagsBiaya: ["bulanan"],
+                bahasa: "Fleksibel",
                 tanggungan: [
                     "Bantuan dana pendidikan ¥1.000.000 – ¥2.000.000 per tahun"
                 ],
@@ -638,11 +697,125 @@
                 caraDaftar: "Mendaftar online/pos setelah terdaftar di universitas di Jepang pada bidang kedokteran, farmasi, nutrisi, atau administrasi bisnis.",
                 catatan: "Dapat diperpanjang setiap tahun melalui proses seleksi ulang.",
                 url: "https://www.otsukafoundation.org/english/"
+            },
+            {
+                id: 15,
+                nama: "MEXT (Monbukagakusho) - Young Leaders' Program (YLP)",
+                penyelenggara: "Pemerintah Jepang (MEXT)",
+                jenjang: ["S2"],
+                kategoriBiaya: "Ditanggung Penuh",
+                tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Bahasa Inggris",
+                tanggungan: [
+                    "100% Biaya kuliah penuh (program 1 tahun di universitas mitra)",
+                    "Tunjangan hidup bulanan ¥242.000/bulan",
+                    "Tiket pesawat pulang-pergi ke Jepang"
+                ],
+                lokasiDaftar: "Dari Indonesia",
+                bulanDaftar: ["September", "Oktober", "November"],
+                labelBulan: "September – November (tergantung jalur)",
+                caraDaftar: "Mendaftar melalui instansi rekomendasi yang ditunjuk atau jalur resmi YLP sesuai program studi (Law, Local Governance, Healthcare Administration, Business).",
+                catatan: "Umumnya ditujukan bagi profesional muda / pegawai dengan pengalaman kerja.",
+                url: "https://www.mext.go.jp/en/policy/education/highered/title02/detail02/sdetail02/1373897.html"
+            },
+            {
+                id: 16,
+                nama: "Japanese Grant Aid for Human Resource Development Scholarship (JDS)",
+                penyelenggara: "Pemerintah Jepang & JICA",
+                jenjang: ["S2"],
+                kategoriBiaya: "Ditanggung Penuh",
+                tagsBiaya: ["spp", "bulanan", "tiket"],
+                bahasa: "Bahasa Inggris",
+                tanggungan: [
+                    "100% Biaya kuliah, pendaftaran, dan tesis/riset",
+                    "Tunjangan bulanan, tunjangan kedatangan, dan akomodasi sesuai skema",
+                    "Tiket pesawat pulang-pergi Indonesia – Jepang"
+                ],
+                lokasiDaftar: "Dari Indonesia",
+                bulanDaftar: ["Agustus", "September", "Oktober", "November"],
+                labelBulan: "Agustus – November",
+                caraDaftar: "Mendaftar dari Indonesia melalui sekretariat program JDS Indonesia yang bekerja sama dengan instansi pemerintah/lembaga terkait.",
+                catatan: "Fokus pada pengembangan SDM di sektor kebijakan publik, ekonomi, infrastruktur, dan pembangunan.",
+                url: "https://jds-scholarship.org/"
+            },
+            {
+                id: 17,
+                nama: "Kyoritsu Maintenance Scholarship Foundation",
+                penyelenggara: "Kyoritsu Maintenance Co., Ltd.",
+                jenjang: ["D3/Kejuruan", "S1", "S2", "S3"],
+                kategoriBiaya: "Parsial",
+                tagsBiaya: ["bulanan"],
+                bahasa: "Bahasa Jepang",
+                tanggungan: [
+                    "Tunjangan bulanan ¥60.000/bulan (durasi hingga 2 tahun)",
+                    "Dukungan pembinaan & jaringan mahasiswa internasional"
+                ],
+                lokasiDaftar: "Setelah di Jepang",
+                bulanDaftar: ["Maret", "April", "September", "Oktober"],
+                labelBulan: "Maret – April & September – Oktober",
+                caraDaftar: "Mendaftar setelah berada di Jepang sebagai mahasiswa biaya mandiri di universitas atau sekolah kejuruan.",
+                catatan: "Seleksi memperhatikan prestasi akademik, kehadiran, dan kemampuan komunikasi bahasa Jepang.",
+                url: "https://www.kyoritsu-scholarship.com/"
+            },
+            {
+                id: 18,
+                nama: "Heiwa Nakajima Foundation Scholarship",
+                penyelenggara: "Heiwa Nakajima Foundation",
+                jenjang: ["S1", "S2", "S3"],
+                kategoriBiaya: "Parsial",
+                tagsBiaya: ["bulanan"],
+                bahasa: "Bahasa Jepang",
+                tanggungan: [
+                    "Tunjangan bulanan ¥100.000/bulan (selama 1 tahun akademik)",
+                    "Dukungan kegiatan pertukaran & pertemuan yayasan"
+                ],
+                lokasiDaftar: "Setelah di Jepang",
+                bulanDaftar: ["September", "Oktober"],
+                labelBulan: "September – Oktober",
+                caraDaftar: "Diajukan melalui universitas tempat mahasiswa asing terdaftar di Jepang.",
+                catatan: "Diperuntukkan bagi mahasiswa internasional berprestasi yang kuliah di Jepang.",
+                url: "https://www.hnf.jp/en/scholarship/"
+            },
+            {
+                id: 19,
+                nama: "LSH Asia Scholarship Program",
+                penyelenggara: "LSH Asia Scholarship Foundation",
+                jenjang: ["S1", "S2"],
+                kategoriBiaya: "Parsial",
+                tagsBiaya: ["bulanan"],
+                bahasa: "Fleksibel",
+                tanggungan: [
+                    "Tunjangan bulanan sekitar ¥100.000 – ¥120.000/bulan",
+                    "Kesempatan mengikuti kegiatan jejaring & seminar"
+                ],
+                lokasiDaftar: "Setelah di Jepang",
+                bulanDaftar: ["Februari", "Maret", "April"],
+                labelBulan: "Februari – April",
+                caraDaftar: "Mendaftar setelah terdaftar sebagai mahasiswa di perguruan tinggi di Jepang sesuai ketentuan periode aplikasi.",
+                catatan: "Cek syarat universitas tujuan dan dokumen akademik terbaru pada situs resmi yayasan.",
+                url: "https://www.lsh-asia-scholarship.org/"
+            },
+            {
+                id: 20,
+                nama: "Tuition Exemption / Reduction (Universitas Negeri & Swasta di Jepang)",
+                penyelenggara: "Masing-masing Universitas di Jepang",
+                jenjang: ["D3/Kejuruan", "S1", "S2", "S3"],
+                kategoriBiaya: "Parsial",
+                tagsBiaya: ["spp"],
+                bahasa: "Fleksibel",
+                tanggungan: [
+                    "Potongan atau pembebasan biaya SPP (100%, 50%, atau 25% per semester) sesuai evaluasi"
+                ],
+                lokasiDaftar: "Setelah di Jepang",
+                bulanDaftar: ["Januari", "Februari", "Juli", "Agustus"],
+                labelBulan: "Setiap awal semester (Spring & Autumn)",
+                caraDaftar: "Diajukan langsung ke bagian akademik/kemahasiswaan universitas di Jepang setelah diterima atau sedang berkuliah.",
+                catatan: "Umumnya mempertimbangkan prestasi akademik dan kondisi ekonomi mahasiswa.",
+                url: "https://www.studyinjapan.go.jp/en/planning/scholarships/"
             }
         ];
 
-        // Load data (bisa ditambah lewat modal dan tersimpan di memori sesi/localStorage)
-        let scholarships = JSON.parse(localStorage.getItem('jp_scholarships_v1')) || initialScholarships;
+        let scholarships = JSON.parse(localStorage.getItem('jp_scholarships_v2')) || initialScholarships;
 
         // DOM Elements
         const gridEl = document.getElementById('scholarshipGrid');
@@ -653,33 +826,33 @@
         const filterCakupan = document.getElementById('filterCakupan');
         const filterLokasi = document.getElementById('filterLokasi');
         const filterBulan = document.getElementById('filterBulan');
+        const filterBahasa = document.getElementById('filterBahasa');
+        const sortBy = document.getElementById('sortBy');
 
-        // Update Top Stats
         function updateStats() {
             document.getElementById('statTotal').textContent = scholarships.length;
             document.getElementById('statIndo').textContent = scholarships.filter(s => s.lokasiDaftar === "Dari Indonesia").length;
             document.getElementById('statFull').textContent = scholarships.filter(s => s.kategoriBiaya === "Ditanggung Penuh").length;
         }
 
-        // Render Cards
         function renderScholarships() {
             const query = searchInput.value.toLowerCase().trim();
             const jenjangVal = filterJenjang.value;
             const cakupanVal = filterCakupan.value;
             const lokasiVal = filterLokasi.value;
             const bulanVal = filterBulan.value;
+            const bahasaVal = filterBahasa.value;
+            const sortVal = sortBy.value;
 
-            const filtered = scholarships.filter(item => {
-                // Search text
+            let filtered = scholarships.filter(item => {
                 const matchQuery = !query ||
                     item.nama.toLowerCase().includes(query) ||
                     item.penyelenggara.toLowerCase().includes(query) ||
+                    (item.bahasa && item.bahasa.toLowerCase().includes(query)) ||
                     item.tanggungan.some(t => t.toLowerCase().includes(query));
 
-                // Jenjang
                 const matchJenjang = jenjangVal === 'all' || item.jenjang.includes(jenjangVal);
 
-                // Cakupan
                 let matchCakupan = true;
                 if (cakupanVal === 'Ditanggung Penuh' || cakupanVal === 'Parsial') {
                     matchCakupan = item.kategoriBiaya === cakupanVal;
@@ -687,14 +860,20 @@
                     matchCakupan = item.tagsBiaya && item.tagsBiaya.includes(cakupanVal);
                 }
 
-                // Lokasi Daftar
                 const matchLokasi = lokasiVal === 'all' || item.lokasiDaftar === lokasiVal;
-
-                // Bulan Daftar
                 const matchBulan = bulanVal === 'all' || item.bulanDaftar.includes(bulanVal);
+                const matchBahasa = bahasaVal === 'all' || (item.bahasa && item.bahasa === bahasaVal);
 
-                return matchQuery && matchJenjang && matchCakupan && matchLokasi && matchBulan;
+                return matchQuery && matchJenjang && matchCakupan && matchLokasi && matchBulan && matchBahasa;
             });
+
+            if (sortVal === 'full_first') {
+                filtered.sort((a, b) => (b.kategoriBiaya === 'Ditanggung Penuh') - (a.kategoriBiaya === 'Ditanggung Penuh'));
+            } else if (sortVal === 'indo_first') {
+                filtered.sort((a, b) => (b.lokasiDaftar === 'Dari Indonesia') - (a.lokasiDaftar === 'Dari Indonesia'));
+            } else if (sortVal === 'name_asc') {
+                filtered.sort((a, b) => a.nama.localeCompare(b.nama, 'id'));
+            }
 
             resultCountEl.textContent = filtered.length;
             gridEl.innerHTML = '';
@@ -711,6 +890,7 @@
             filtered.forEach(item => {
                 const isFull = item.kategoriBiaya === "Ditanggung Penuh";
                 const isIndo = item.lokasiDaftar === "Dari Indonesia";
+                const bahasaLabel = item.bahasa || "Fleksibel";
 
                 const card = document.createElement('article');
                 card.className = "bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-red-300 transition flex flex-col justify-between cursor-pointer group";
@@ -718,7 +898,6 @@
 
                 card.innerHTML = `
                     <div>
-                        <!-- Top Badges -->
                         <div class="flex flex-wrap items-center gap-1.5 mb-3">
                             <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isIndo ? 'badge-indo' : 'badge-japan'}">
                                 ${isIndo ? '🇮🇩 Daftar dari Indonesia' : '🇯🇵 Setelah di Jepang'}
@@ -726,15 +905,16 @@
                             <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isFull ? 'badge-full' : 'badge-partial'}">
                                 ${isFull ? '★ Ditanggung Penuh' : 'Parsial'}
                             </span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold badge-lang">
+                                ${bahasaLabel}
+                            </span>
                         </div>
 
-                        <!-- Title & Organizer -->
                         <h3 class="text-base font-bold text-slate-900 group-hover:text-red-700 transition leading-snug">
                             ${item.nama}
                         </h3>
                         <p class="text-xs text-slate-500 mt-1">${item.penyelenggara}</p>
 
-                        <!-- Jenjang Tags -->
                         <div class="mt-3 flex flex-wrap gap-1.5">
                             ${item.jenjang.map(j => `
                                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-[11px] font-semibold">
@@ -743,7 +923,6 @@
                             `).join('')}
                         </div>
 
-                        <!-- Apa yang ditanggung -->
                         <div class="mt-4 pt-3.5 border-t border-slate-100">
                             <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Yang Ditanggung:</p>
                             <ul class="space-y-1 text-xs text-slate-700">
@@ -757,7 +936,6 @@
                         </div>
                     </div>
 
-                    <!-- Footer Info -->
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
                         <div class="text-slate-600">
                             <span class="text-slate-400">Daftar:</span>
@@ -772,7 +950,6 @@
             });
         }
 
-        // Quick Filter Presets
         function applyQuickFilter(type) {
             resetFilters(false);
             if (type === 'indo_full') {
@@ -786,21 +963,25 @@
                 filterJenjang.value = 'S2';
             } else if (type === 'in_japan') {
                 filterLokasi.value = 'Setelah di Jepang';
+            } else if (type === 'english_friendly') {
+                filterBahasa.value = 'Bahasa Inggris';
+            } else if (type === 'japan_lang') {
+                filterBahasa.value = 'Bahasa Jepang';
             }
             renderScholarships();
         }
 
-        // Reset Filters
         function resetFilters(shouldRender = true) {
             searchInput.value = '';
             filterJenjang.value = 'all';
             filterCakupan.value = 'all';
             filterLokasi.value = 'all';
             filterBulan.value = 'all';
+            filterBahasa.value = 'all';
+            sortBy.value = 'default';
             if (shouldRender) renderScholarships();
         }
 
-        // Detail Modal Controls
         function openDetailModal(item) {
             const isFull = item.kategoriBiaya === "Ditanggung Penuh";
             const isIndo = item.lokasiDaftar === "Dari Indonesia";
@@ -812,6 +993,9 @@
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${isFull ? 'badge-full' : 'badge-partial'}">
                     ${item.kategoriBiaya}
                 </span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold badge-lang">
+                    ${item.bahasa || 'Fleksibel'}
+                </span>
             `;
             document.getElementById('modalTitle').textContent = item.nama;
             document.getElementById('modalOrganizer').textContent = item.penyelenggara;
@@ -819,6 +1003,7 @@
             document.getElementById('modalBulan').textContent = item.labelBulan;
             document.getElementById('modalLokasi').textContent = item.lokasiDaftar;
             document.getElementById('modalKategoriBiaya').textContent = item.kategoriBiaya;
+            document.getElementById('modalBahasa').textContent = item.bahasa || 'Fleksibel / Tergantung Program';
 
             document.getElementById('modalCoverageList').innerHTML = item.tanggungan.map(t => `
                 <li class="flex items-start gap-2">
@@ -840,7 +1025,6 @@
             document.body.style.overflow = '';
         }
 
-        // Add Scholarship Modal Controls
         document.getElementById('btnOpenAddModal').onclick = () => {
             document.getElementById('addModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -867,6 +1051,7 @@
                 jenjang: jenjangArr.length ? jenjangArr : ["S1"],
                 kategoriBiaya: document.getElementById('newKategori').value,
                 tagsBiaya: ["spp", "bulanan"],
+                bahasa: document.getElementById('newBahasa').value,
                 tanggungan: tanggunganArr.length ? tanggunganArr : ["Sesuai ketentuan penyelenggara"],
                 lokasiDaftar: document.getElementById('newLokasi').value,
                 bulanDaftar: matchedMonths.length ? matchedMonths : allMonths,
@@ -877,22 +1062,22 @@
             };
 
             scholarships.unshift(newEntry);
-            localStorage.setItem('jp_scholarships_v1', JSON.stringify(scholarships));
+            localStorage.setItem('jp_scholarships_v2', JSON.stringify(scholarships));
             updateStats();
             renderScholarships();
             e.target.reset();
             closeAddModal();
         };
 
-        // Event Listeners
         searchInput.addEventListener('input', renderScholarships);
         filterJenjang.addEventListener('change', renderScholarships);
         filterCakupan.addEventListener('change', renderScholarships);
         filterLokasi.addEventListener('change', renderScholarships);
         filterBulan.addEventListener('change', renderScholarships);
+        filterBahasa.addEventListener('change', renderScholarships);
+        sortBy.addEventListener('change', renderScholarships);
         document.getElementById('btnReset').addEventListener('click', () => resetFilters(true));
 
-        // Close modal on outside click
         document.getElementById('detailModal').addEventListener('click', (e) => {
             if (e.target.id === 'detailModal') closeDetailModal();
         });
@@ -900,7 +1085,6 @@
             if (e.target.id === 'addModal') closeAddModal();
         });
 
-        // Init
         updateStats();
         renderScholarships();
     </script>
